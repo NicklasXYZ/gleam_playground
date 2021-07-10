@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: gleam-playground-ingress-https
+  namespace: gleam-playground
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    traefik.ingress.kubernetes.io/router.middlewares: gleam-playground-gleam-playground-ratelimit@kubernetescrd
+spec:
+  tls:
+  - hosts:
+    - <insert-host-here>
+    secretName: k3s-letsencrypt-cert
+  rules:
+  - host: <insert-host-here>
+    http:
+      paths:
+      - path: /apps/gleam-playground
+        pathType: Prefix
+        backend:
+          serviceName: gleam-playground-frontend
+          servicePort: 80
+---
+# Average is the maximum rate, in requests/s, allowed for the given source. It defaults to 0, which means no rate limiting.
+# Burst is the maximum number of requests allowed to go through in the same arbitrarily small period of time. It defaults to 1.
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: gleam-playground-ratelimit
+spec:
+  rateLimit:
+      average: 100
+      burst: 50

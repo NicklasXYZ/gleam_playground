@@ -1,0 +1,14 @@
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: "traefik"    
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+  tls:
+    - hosts:
+        - <insert-gateway-url-here>
+      secretName: openfaas-crt
+  hosts:
+    - host: <insert-gateway-url-here>
+      serviceName: gateway
+      servicePort: 8080
+      path: /

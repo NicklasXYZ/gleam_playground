@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: gleam-playground-ingress-http
+  namespace: gleam-playground
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/router.middlewares: gleam-playground-gleam-playground-redirectscheme@kubernetescrd
+spec:
+  rules:
+  - host: <insert-host-here>
+    http:
+      paths:
+      - path: /apps/gleam-playground
+        pathType: Prefix
+        backend:
+          serviceName: gleam-playground-frontend
+          servicePort: 80
+---
+# Redirect to https
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: gleam-playground-redirectscheme
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true

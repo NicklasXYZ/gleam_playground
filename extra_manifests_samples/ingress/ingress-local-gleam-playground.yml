@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: gleam-playground-ingress-http
+  namespace: gleam-playground
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+  - host: <insert-localhost-here>
+    http:
+      paths:
+      - path: /apps/gleam-playground
+        pathType: Prefix
+        backend:
+          serviceName: gleam-playground-frontend
+          servicePort: 80
