@@ -1,0 +1,9 @@
+LICENSE
+.git
+.DS_Store
+.gitignore
+.idea
+.vscode
+web/node_modules
+tools/
+target/

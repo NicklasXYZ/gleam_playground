@@ -1,0 +1,39 @@
+version: 1.0
+
+provider:
+  name: openfaas
+  gateway: http://localhost:31112
+configuration:
+  copy:
+    - ./common
+functions:
+  gleam-playground-share:
+    lang: dockerfile
+    handler: ./gleam-playground-share
+    image: nicklasxyz/gleam-playground-share:latest
+    secrets:
+    - gleam-playground-secret
+    readonly_root_filesystem: true
+    environment:
+      write_debug: true
+      read_timeout: '10s'
+      write_timeout: '10s'
+      upstream_timeout: '5s'
+    labels:
+     com.openfaas.scale.min: 1
+     com.openfaas.scale.max: 5
+  gleam-playground-run:
+    lang: dockerfile
+    handler: ./gleam-playground-run
+    image: nicklasxyz/gleam-playground-run:latest
+    secrets:
+    - gleam-playground-secret
+    readonly_root_filesystem: true
+    environment:
+      write_debug: true
+      read_timeout: '20s'
+      write_timeout: '20s'
+      upstream_timeout: '15s'
+    labels:
+     com.openfaas.scale.min: 1
+     com.openfaas.scale.max: 18

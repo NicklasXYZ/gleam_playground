@@ -1,0 +1,24 @@
+{
+  "Basic Examples": [
+    {
+      "label": "Hello World",
+      "snippet": "55af814b-d632-411a-a583-06a6c7971e7d"
+    },
+    {
+      "label": "Fibonacci",
+      "snippet": "35957df4-b5df-4f6e-8611-e5ce8a0bfa76"
+    },
+    {
+      "label": "Pascal Triangle",
+      "snippet": "f0b0eb0e-11ce-4a74-bfb6-3e0d54bd0645"
+    },
+    {
+      "label": "Sierpinski Carpet",
+      "snippet": "1ae08768-f751-4e6c-9e00-ea8f8fc28c6c"
+    },
+    {
+      "label": "Sierpinski Triangle",
+      "snippet": "49b547ca-f3e8-4cba-a48a-990f2db3e09f"
+    }
+  ]
+}

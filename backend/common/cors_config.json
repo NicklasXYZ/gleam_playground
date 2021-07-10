@@ -1,0 +1,8 @@
+{
+    "allow_origins": [
+        "http://nicklas.xyz", "https://nicklas.xyz"
+    ],
+    "allow_credentials": true,
+    "allow_methods": ["*"],
+    "allow_headers": ["*"]
+}

@@ -1,0 +1,6 @@
+FROM node:13-alpine as ui-build
+COPY web /tmp/web
+WORKDIR /tmp/web
+
+# Build react app
+CMD yarn install --silent && yarn build

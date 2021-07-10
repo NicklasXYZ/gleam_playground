@@ -1,0 +1,37 @@
+.header {
+    position:relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 44px;
+}
+
+.app__update {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 500px;
+    z-index: 9999;
+}
+
+.app__update.app__update--visible {
+    display: block
+}
+
+.header__preloader {
+    margin-right: 15px;
+}
+
+.header__logo {
+    height: 8.00em;
+    width: 8.00em;
+    margin-left: 15px;
+}
+
+.header__commandBar {
+    flex: 1 1 auto;
+}

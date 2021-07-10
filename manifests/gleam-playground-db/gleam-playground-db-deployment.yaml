@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gleam-playground-db
+  namespace: gleam-playground
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.service: gleam-playground-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.service: gleam-playground-db
+    spec:
+      containers:
+      - envFrom:
+        - secretRef:
+            name: gleam-playground-secret
+            optional: false
+        image: postgres:latest
+        name: gleam-playground-db
+        ports:
+        - containerPort: 5432
+        resources:
+          requests:
+            cpu: 250m
+            memory: 500Mi
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: gleam-playground-db-claim
+      hostNetwork: false
+      volumes:
+      - name: gleam-playground-db-claim
+        persistentVolumeClaim:
+          claimName: gleam-playground-db-claim
+          readOnly: false
